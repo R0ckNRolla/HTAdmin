@@ -1,0 +1,50 @@
+Rubber-Duckie Readme
+====================
+
+Registry entries needed:
+
+[HKCU\Software\HTAdmin]
+
+Domain			-- String
+Starting OU		-- String
+MRU				-- String
+FirstRun		-- Bool
+
+Profiles		-- Key
+	Name		-- Key
+	
+
+	
+Subroutines Needed:
+
+// Change account properties
+*isAccount( account )
+*getGroups( account )
+*addGroup( account, group )
+*removeGroup( account, group )
+*getControlFlag( account, flag )
+*setControlFlag( account, flag, value )
+*disableAccount( account )
+*enableAccount( account )
+*lockAccount( account )
+*unlockAccount( account )
+*getAttribute( account, attribute )
+*setAttribute( account, attribute, value )
+*changePassword( account, password )
+
+// Account creation
+createAccount()
+createUserspace( account, sharepath )
+generateUsername( ? )
+
+// GUI manipulation
+*showPanel( panel )
+*setMessage( message, type )
+*clearMessage()
+clearForms()
+
+
+TO UNABMBIGUOSLY REFER TO AN ACCOUNT, USE THE DISTINGUISHED NAME!
+
+
+Background-Gray Color: #777976
