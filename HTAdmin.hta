@@ -26,6 +26,9 @@
 		Const ADS_PASSWD_CANT_CHANGE		= &H40
 		Const ADS_UF_DONT_EXPIRE_PASSWD		= &H10000
 		Const ADS_UF_PASSWORD_EXPIRED		= &H800000
+		
+		' Base DN to test with.  Replace later!
+		Dim basedn : basedn = "dc=testad,dc=com"
 
 		' Resize the window so it looks un-crappy
 		window.resizeto 900,600
@@ -445,23 +448,23 @@
 			<a onclick="setMessage 'Boo!  A failure message! :-(', 'BAD'">Bad</a>
 			<a onclick="setMessage 'An informative message.  I have no strong feelings either way about this message.', 'INFO'">Info</a>
 			<br>
-			<a onclick="If isAccount('CN=Test User,OU=Users-Tech,DC=west,DC=k12,DC=oh,DC=us') Then msgbox('Valid Account!') Else msgbox('Invalid Account!')">Valid account</a>
-			<a onclick="If isAccount('cn=Your Mother,ou=Users-Tech,dc=west,dc=k12,dc=oh,dc=us') Then msgbox('Valid Account!') Else msgbox('Invalid Account!')">Invalid account</a>
+			<a onclick="If isAccount('CN=Test User,OU=Users-Tech,' & basedn) Then msgbox('Valid Account!') Else msgbox('Invalid Account!')">Valid account</a>
+			<a onclick="If isAccount('cn=Your Mother,ou=Users-Tech,' & basedn) Then msgbox('Valid Account!') Else msgbox('Invalid Account!')">Invalid account</a>
 			<br>
-			<a onclick="setAttribute 'CN=Test User,OU=Users-Tech,DC=west,DC=k12,DC=oh,DC=us', 'sn', 'Deacon': getAttribute 'CN=Test User,OU=Users-Tech,DC=west,DC=k12,DC=oh,DC=us', 'sn'">Set given name to "Deacon"</a>
-			<a onclick="setAttribute 'CN=Test User,OU=Users-Tech,DC=west,DC=k12,DC=oh,DC=us', 'sn', 'User': getAttribute 'CN=Test User,OU=Users-Tech,DC=west,DC=k12,DC=oh,DC=us', 'sn'">Set given name to "User"</a>
+			<a onclick="setAttribute 'CN=Test User,OU=Users-Tech,' & basedn, 'sn', 'Deacon': getAttribute 'CN=Test User,OU=Users-Tech,' & basedn, 'sn'">Set given name to "Deacon"</a>
+			<a onclick="setAttribute 'CN=Test User,OU=Users-Tech,' & basedn, 'sn', 'User': getAttribute 'CN=Test User,OU=Users-Tech,' & basedn, 'sn'">Set given name to "User"</a>
 			<br>
-			<a onclick="Dim groups, group : Set groups = getGroups( 'CN=Test User,OU=Users-Tech,DC=west,DC=k12,DC=oh,DC=us' ) : For Each group in groups : msgbox group.get('cn') : Next">List groups</a>
+			<a onclick="Dim groups, group : Set groups = getGroups( 'CN=Test User,OU=Users-Tech,' & basedn ) : For Each group in groups : msgbox group.get('cn') : Next">List groups</a>
 			<br>
-			<a onclick="addGroup 'CN=Test User,OU=Users-Tech,DC=west,DC=k12,DC=oh,DC=us', 'CN=Test Group,OU=Users-Tech,DC=west,DC=k12,DC=oh,DC=us'">Add to group</a>
-			<a onclick="removeGroup 'CN=Test User,OU=Users-Tech,DC=west,DC=k12,DC=oh,DC=us', 'CN=Test Group,OU=Users-Tech,DC=west,DC=k12,DC=oh,DC=us'">Remove from group</a>
+			<a onclick="addGroup 'CN=Test User,OU=Users-Tech,' & basedn, 'CN=Test Group,OU=Users-Tech,' & basedn">Add to group</a>
+			<a onclick="removeGroup 'CN=Test User,OU=Users-Tech,' & basedn, 'CN=Test Group,OU=Users-Tech,' & basedn">Remove from group</a>
 			<br>
-			<a onclick="If getControlFlag('CN=Test User,OU=Users-Tech,DC=west,DC=k12,DC=oh,DC=us', ADS_UF_ACCOUNTDISABLE) Then msgbox('True!') Else msgbox('False!')">Is account disabled?</a>
-			<a onclick="enableAccount 'CN=Test User,OU=Users-Tech,DC=west,DC=k12,DC=oh,DC=us'">Enable</a>
-			<a onclick="disableAccount 'CN=Test User,OU=Users-Tech,DC=west,DC=k12,DC=oh,DC=us'">Disable</a>
+			<a onclick="If getControlFlag('CN=Test User,OU=Users-Tech,' & basedn, ADS_UF_ACCOUNTDISABLE) Then msgbox('True!') Else msgbox('False!')">Is account disabled?</a>
+			<a onclick="enableAccount 'CN=Test User,OU=Users-Tech,' & basedn">Enable</a>
+			<a onclick="disableAccount 'CN=Test User,OU=Users-Tech,' & basedn">Disable</a>
 			<br>
-			<a onclick="If getControlFlag('CN=Test User,OU=Users-Tech,DC=west,DC=k12,DC=oh,DC=us', ADS_UF_LOCKOUT) Then msgbox('True!') Else msgbox('False!')">Is account locked?</a>
-			<a onclick="unlockAccount 'CN=Test User,OU=Users-Tech,DC=west,DC=k12,DC=oh,DC=us'">Unlock</a>
+			<a onclick="If getControlFlag('CN=Test User,OU=Users-Tech,' & basedn, ADS_UF_LOCKOUT) Then msgbox('True!') Else msgbox('False!')">Is account locked?</a>
+			<a onclick="unlockAccount 'CN=Test User,OU=Users-Tech,' & basedn">Unlock</a>
 			<br><br>
 		</div>
 	
